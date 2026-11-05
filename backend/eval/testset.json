@@ -1,0 +1,297 @@
+[
+  {
+    "id": "sample-01",
+    "text": "Say farewell to chemical-filled moisturizers and nourish your barrier with botanical precision.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "tone", "ruleId": "TONE-01", "quote": "chemical-filled" }
+    ]
+  },
+  {
+    "id": "sample-02",
+    "text": "Our restorative serum is formulated with 2% encapsulated bakuchiol to gently soothe sensitive skin.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-03",
+    "text": "Experience our miracle broth infused with cold-pressed rosehip seed oil from certified organic cooperatives.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "terminology", "ruleId": "TERM-02", "quote": "miracle broth" }
+    ]
+  },
+  {
+    "id": "sample-04",
+    "text": "Clinically proven to cure cystic acne and eradicate blemishes completely.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "claim", "ruleId": "CLAIM-03", "quote": "cure cystic acne" }
+    ]
+  },
+  {
+    "id": "sample-05",
+    "text": "Bottles are molded with 70% post-consumer recycled flint glass for mindful packaging.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-06",
+    "text": "Achieve flawless radiant skin in just one night with our overnight oil treatment.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "claim", "ruleId": "CLM-05", "quote": "in just one night" }
+    ]
+  },
+  {
+    "id": "sample-07",
+    "text": "Our formula is 100% eco-friendly and guarantees zero carbon impact.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "terminology", "ruleId": "TERM-08", "quote": "100% eco-friendly" },
+      { "type": "terminology", "ruleId": "TERM-08", "quote": "zero impact" }
+    ]
+  },
+  {
+    "id": "sample-08",
+    "text": "Non-comedogenic and dermatologically tested for sensitive barrier support.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-09",
+    "text": "Our patented Bio-Fermented Botanical Complex delivers lasting cellular hydration.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-10",
+    "text": "Erase 10 years of wrinkles within 48 hours using our youth potion.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "tone", "ruleId": "TONE-09", "quote": "erase 10 years of wrinkles" },
+      { "type": "claim", "ruleId": "CLM-05", "quote": "within 48 hours" }
+    ]
+  },
+  {
+    "id": "sample-11",
+    "text": "Leaping Bunny certified cruelty-free with no animal testing at any stage of development.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-12",
+    "text": "Obsessed with this glow! Check the link in my bio for special discounts. #dewy #skincare #natural #sp",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "disclosure", "ruleId": "DISC-04", "quote": "#sp" }
+    ]
+  },
+  {
+    "id": "sample-13",
+    "text": "#Ad | Paid partnership with Verdant Skin. Visibly calms redness and supports moisture barrier.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-14",
+    "text": "Voted the No.1 best serum in the world by beauty editors everywhere.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "terminology", "ruleId": "TERM-02", "quote": "No.1" }
+    ]
+  },
+  {
+    "id": "sample-15",
+    "text": "94% of clinical trial participants reported improved barrier hydration within 14 days.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-16",
+    "text": "Our formula gives you 99% wrinkle elimination in 3 days.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "claim", "ruleId": "CLM-05", "quote": "99%" },
+      { "type": "claim", "ruleId": "CLM-05", "quote": "in 3 days" }
+    ]
+  },
+  {
+    "id": "sample-17",
+    "text": "Discover our pure youth elixir with 100% all-natural botanical oils.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "claim", "ruleId": "CLM-10", "quote": "100% all-natural" }
+    ]
+  },
+  {
+    "id": "sample-18",
+    "text": "Ethically harvested cold-pressed rosehip seed oil from certified organic cooperatives in Patagonia.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-19",
+    "text": "Free from synthetic fragrance, phthalates, parabens, and artificial coal-tar dyes.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-20",
+    "text": "Guaranteed to heal eczema and soothe dermatitis instantly.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "claim", "ruleId": "CLAIM-03", "quote": "heal eczema" }
+    ]
+  },
+  {
+    "id": "sample-21",
+    "text": "Manufactured in an ISO 22716 Good Manufacturing Practice certified facility.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-22",
+    "text": "Keep your daily routine clean and toxic-free with our gentle foaming wash.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "tone", "ruleId": "TONE-01", "quote": "toxic-free" }
+    ]
+  },
+  {
+    "id": "sample-23",
+    "text": "Love this new oil! So nourishing on winter skin. #collab #skincare",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "disclosure", "ruleId": "DISC-04", "quote": "#collab" }
+    ]
+  },
+  {
+    "id": "sample-24",
+    "text": "#Ad Loving this daily soothing moisturizer formulated with dermatologically tested botanical extracts.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-25",
+    "text": "Here is our product packaging: ![](amber_bottle.png)",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "accessibility", "ruleId": "ACC-06", "quote": "![](amber_bottle.png)" }
+    ]
+  },
+  {
+    "id": "sample-26",
+    "text": "Here is our product packaging: ![Verdant Skin Amber Glass Bottle](amber_bottle.png)",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-27",
+    "text": "Sweeps away dead cells with zero impact on the environment.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "terminology", "ruleId": "TERM-08", "quote": "zero impact" }
+    ]
+  },
+  {
+    "id": "sample-28",
+    "text": "This serum will cure acne in 7 days without drying.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "claim", "ruleId": "CLAIM-03", "quote": "cure acne" },
+      { "type": "claim", "ruleId": "CLM-05", "quote": "in 7 days" }
+    ]
+  },
+  {
+    "id": "sample-29",
+    "text": "Formulated with Bio-Fermented Botanical Complex and plant-derived Bakuchiol.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-30",
+    "text": "Say no to chemical-filled products and switch to our 100% all-natural cream.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "tone", "ruleId": "TONE-01", "quote": "chemical-filled" },
+      { "type": "claim", "ruleId": "CLM-10", "quote": "100% all-natural" }
+    ]
+  },
+  {
+    "id": "sample-31",
+    "text": "Calms surface redness and supports skin barrier longevity through mindful hydration.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-32",
+    "text": "Ranked #1 miracle formula for curing redness and blemishes.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "terminology", "ruleId": "TERM-02", "quote": "#1" }
+    ]
+  },
+  {
+    "id": "sample-33",
+    "text": "Tested by independent clinical dermatologists on 52 participants with barrier-compromised skin.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-34",
+    "text": "Look at this product shot: <img src=\"tonic.jpg\" alt=\"\">",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "accessibility", "ruleId": "ACC-06", "quote": "<img src=\"tonic.jpg\" alt=\"\">" }
+    ]
+  },
+  {
+    "id": "sample-35",
+    "text": "Infused with 85% natural moisture enhancers not found anywhere else.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "claim", "ruleId": "CLM-05", "quote": "85%" }
+    ]
+  },
+  {
+    "id": "sample-36",
+    "text": "So gentle that it permanently eliminates cystic acne for good.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "claim", "ruleId": "CLAIM-03", "quote": "eliminates cystic acne" }
+    ]
+  },
+  {
+    "id": "sample-37",
+    "text": "Follow with broad-spectrum SPF 30+ daytime protection when using exfoliant actives.",
+    "isClean": true,
+    "expectedFindings": []
+  },
+  {
+    "id": "sample-38",
+    "text": "Erase 10 years of wrinkles overnight with our miraculous barrier elixir.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "tone", "ruleId": "TONE-09", "quote": "erase 10 years of wrinkles" }
+    ]
+  },
+  {
+    "id": "sample-39",
+    "text": "Check out my partner discount code for 20% off! #partner #skincare",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "disclosure", "ruleId": "DISC-04", "quote": "#partner" }
+    ]
+  },
+  {
+    "id": "sample-40",
+    "text": "Clinically proven to cure eczema in just 48 hours with 100% eco-friendly ingredients.",
+    "isClean": false,
+    "expectedFindings": [
+      { "type": "claim", "ruleId": "CLAIM-03", "quote": "cure eczema" },
+      { "type": "claim", "ruleId": "CLM-05", "quote": "in just 48 hours" },
+      { "type": "terminology", "ruleId": "TERM-08", "quote": "100% eco-friendly" }
+    ]
+  }
+]

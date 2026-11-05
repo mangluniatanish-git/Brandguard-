@@ -1,0 +1,32 @@
+{
+  "id": "us_ftc",
+  "name": "US FTC Endorsement Guides",
+  "description": "US Federal Trade Commission Health Products & Influencer Endorsement Guides",
+  "note": "Rule IDs are our own labels, not official clause numbers, and the descriptions are plain-language summaries.",
+  "rules": [
+    {
+      "id": "FTC-DISC-01",
+      "type": "disclosure",
+      "severity": "high",
+      "title": "Clear and Conspicuous Material Connection",
+      "description": "Disclosures such as '#Ad' or 'Sponsored' must be unavoidable and placed above the fold or in the opening audio/video frame, not buried in hashtags or comments.",
+      "source": "FTC Guides Concerning the Use of Endorsements and Testimonials in Advertising (16 CFR Part 255)"
+    },
+    {
+      "id": "FTC-HEALTH-02",
+      "type": "claim",
+      "severity": "high",
+      "title": "Competent and Reliable Scientific Evidence",
+      "description": "Health, dermatological, and efficacy claims must be backed by competent scientific evidence from human clinical trials before dissemination.",
+      "source": "FTC Health Products Compliance Guidance & Section 5 of the FTC Act"
+    },
+    {
+      "id": "FTC-SUPER-03",
+      "type": "claim",
+      "severity": "medium",
+      "title": "Objective Superlative Substantiation",
+      "description": "Superlative assertions ('#1 rated', 'most effective serum') imply objective fact and must be substantiated by consumer survey or independent sales auditing.",
+      "source": "FTC Policy Statement on Deception"
+    }
+  ]
+}

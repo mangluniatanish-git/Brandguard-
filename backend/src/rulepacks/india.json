@@ -1,0 +1,40 @@
+{
+  "id": "asci_ccpa",
+  "name": "India ASCI/CCPA",
+  "description": "Advertising Standards Council of India & Central Consumer Protection Authority Guidelines",
+  "note": "Rule IDs are our own labels, not official clause numbers, and the descriptions are plain-language summaries.",
+  "rules": [
+    {
+      "id": "ASCI-DISC-01",
+      "type": "disclosure",
+      "severity": "high",
+      "title": "Prominent Material Disclosure",
+      "description": "Influencer and promotional advertisements must clearly feature upfront disclosure such as '#Ad', '#Sponsored', or 'Advertisement' placed prominently within the opening text or first 3 seconds.",
+      "source": "ASCI Guidelines for Influencer Advertising & CCPA Misleading Advertisements Prevention Guidelines"
+    },
+    {
+      "id": "ASCI-CLAIM-02",
+      "type": "claim",
+      "severity": "high",
+      "title": "Substantiation of Medical Cure Claims",
+      "description": "Cosmetic products cannot claim to diagnose, cure, mitigate, or permanently eradicate diseases or conditions including acne, eczema, or psoriasis without statutory clinical drug license approval.",
+      "source": "ASCI Code Chapter I (Substantiation of Claims) & Drugs and Magic Remedies Act"
+    },
+    {
+      "id": "ASCI-GREEN-03",
+      "type": "terminology",
+      "severity": "medium",
+      "title": "Greenwashing and Environmental Claims",
+      "description": "Generic claims like '100% eco-friendly', 'green', or 'sustainable' without verifiable lifecycle assessment metrics are misleading.",
+      "source": "ASCI Guidelines for Environmental and Green Claims 2024"
+    },
+    {
+      "id": "ASCI-SUPER-04",
+      "type": "claim",
+      "severity": "medium",
+      "title": "Comparative Superlatives",
+      "description": "Claims such as 'No.1', 'India's best', or 'only brand that works' require independent market leadership verification.",
+      "source": "ASCI Code Chapter IV (Fair Competition & Superlative Claims)"
+    }
+  ]
+}

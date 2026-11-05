@@ -1,0 +1,32 @@
+{
+  "id": "uk_cma",
+  "name": "UK CMA Green Claims",
+  "description": "UK Competition and Markets Authority & ASA Misleading Advertising Code",
+  "note": "Rule IDs are our own labels, not official clause numbers, and the descriptions are plain-language summaries.",
+  "rules": [
+    {
+      "id": "CMA-GREEN-01",
+      "type": "terminology",
+      "severity": "high",
+      "title": "Clear and Accurate Environmental Claims",
+      "description": "Claims such as 'zero impact', 'carbon zero', or '100% natural' must consider the full lifecycle of the product and cannot omit significant environmental impacts.",
+      "source": "UK CMA Green Claims Code (Principle 1 & 2)"
+    },
+    {
+      "id": "ASA-DISC-02",
+      "type": "disclosure",
+      "severity": "high",
+      "title": "Upfront Commercial Identifier",
+      "description": "Commercial communications by affiliates and influencers must be immediately identifiable as marketing (using #Ad clearly visible before engagement).",
+      "source": "ASA CAP Code Rule 2.1 (Recognition of Marketing Communications)"
+    },
+    {
+      "id": "ASA-TIME-03",
+      "type": "claim",
+      "severity": "medium",
+      "title": "Substantiation of Time-Bound Results",
+      "description": "Claims promising results within a specific time window ('in 3 days') must have robust human dermatological trials backing the speed claim.",
+      "source": "ASA CAP Code Rule 3.1 (Misleading Advertising & Substantiation)"
+    }
+  ]
+}
