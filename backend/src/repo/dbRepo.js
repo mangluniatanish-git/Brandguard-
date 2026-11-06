@@ -1,11 +1,16 @@
 import fs from 'fs/promises';
 import path from 'path';
+import os from 'os';
 import { fileURLToPath } from 'url';
 import { logger } from '../utils/logger.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DB_PATH = path.resolve(__dirname, '../../data/db.json');
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const BUNDLED_DB_PATH = path.resolve(__dirname, '../../data/db.json');
+const DB_PATH = isServerless
+  ? path.join(os.tmpdir(), 'brandguard_db.json')
+  : BUNDLED_DB_PATH;
 
 // Serialized write promise queue
 let writeQueue = Promise.resolve();
@@ -81,7 +86,17 @@ async function readDb() {
     return JSON.parse(JSON.stringify(cache));
   } catch (err) {
     if (err.code === 'ENOENT') {
-      logger.info('Database data/db.json not found during read. Initializing with full seed data...');
+      logger.info('Database db.json not found during read. Initializing with seed data...');
+      if (isServerless) {
+        try {
+          const bundledRaw = await fs.readFile(BUNDLED_DB_PATH, 'utf-8');
+          cache = JSON.parse(bundledRaw);
+          await atomicWrite(cache);
+          return JSON.parse(JSON.stringify(cache));
+        } catch (_) {
+          // Bundled file not accessible, continue to runSeed
+        }
+      }
       const { runSeed } = await import('../scripts/seed.js');
       await runSeed();
       const raw = await fs.readFile(DB_PATH, 'utf-8');

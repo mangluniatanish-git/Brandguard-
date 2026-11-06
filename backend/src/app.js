@@ -37,7 +37,7 @@ app.use(
 
       if (
         normalizedOrigin === allowedOrigin ||
-        (config.NODE_ENV !== 'production' && origin.startsWith('http://localhost:'))
+        normalizedOrigin.endsWith('.vercel.app') || (config.NODE_ENV !== 'production' && origin.startsWith('http://localhost:'))
       ) {
         return callback(null, true);
       }

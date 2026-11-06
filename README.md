@@ -6,99 +6,93 @@ A comprehensive, production-ready human-in-the-loop compliance platform for bran
 
 ## Architecture Overview
 
-* **Frontend**: React 18, Vite, Tailwind CSS, Lucide React, React Router 6. Deployed on **Vercel**.
-* **Backend**: Node.js, Express, Zod validation, JWT authentication, Multer document parsing, Pino logging. Deployed on **Render**.
+* **Fullstack Vercel Deployment**: React 18 / Vite frontend in `dist/` combined with Serverless Express API in `api/index.js`.
+* **Alternative Split Deployment**: Frontend on **Vercel**, standalone Node.js Express server on **Render**.
 * **AI & Rules Pipeline**: Official Google Gen AI SDK (`@google/genai`) with structured JSON schema enforcement, coupled with strict regex-based brand rule engines, PII redaction, and deterministic claim validation.
-* **Storage**: In-memory repository pattern backed by serialized JSON store (`backend/data/db.json`).
+* **Storage**: In-memory repository pattern backed by serialized JSON store (`/tmp/brandguard_db.json` on Vercel serverless; `backend/data/db.json` on persistent/local).
 
 ---
 
-## 1. Backend Deployment (Render)
+## 1. Fullstack Deployment on Vercel (Recommended)
 
-Deploy the backend as a **Web Service** on [Render](https://render.com):
+You can deploy the complete frontend and backend serverless API together in a single Vercel project:
+
+### Step-by-Step Instructions:
+1. Log in to your Vercel account / scope: **[https://vercel.com/sanskar-ec31](https://vercel.com/sanskar-ec31)**
+2. Click **"Add New..."** → **"Project"**.
+3. Import your GitHub repository: `mangluniatanish-git/Brandguard-`.
+4. Configure the Project:
+   * **Project Name**: `BrandGuard`
+   * **Framework Preset**: `Vite`
+   * **Root Directory**: `./` (leave default)
+   * **Build Command**: `npm run build`
+   * **Output Directory**: `dist`
+5. **Environment Variables**:
+   Under **Environment Variables**, add:
+   * `JWT_SECRET`: A secure string of at least 16 characters (e.g., `brandguard_secure_jwt_prod_secret_2026`)
+   * `GEMINI_API_KEY`: Your Google Gemini API Key
+   * `GEMINI_MODEL`: `gemini-1.5-flash`
+   * `AI_ENABLED`: `true`
+   * `REDACTION_ENABLED`: `true`
+   * `DEMO_MODE`: `true`
+   *(Note: `VITE_API_URL` is optional! When omitted, frontend calls `/api/*` on the same Vercel origin seamlessly).*
+6. Click **Deploy**.
+7. Once deployed, test the health check at:
+   `https://<your-project>.vercel.app/api/health`
+
+---
+
+## 2. Alternative Backend Deployment (Render)
+
+If you prefer running a dedicated Express Node.js instance on [Render](https://render.com):
 
 1. **Connect Repository**: Link your GitHub repository in Render.
 2. **Service Settings**:
-   * **Name**: `brandguard-api` (or your chosen service name)
+   * **Name**: `brandguard-api`
    * **Root Directory**: `backend`
    * **Runtime**: `Node`
    * **Build Command**: `npm install`
    * **Start Command**: `node src/server.js`
    * **Health Check Path**: `/api/health`
-
 3. **Environment Variables**:
-   In the Render dashboard under **Environment**, configure the following variables:
-
-   | Variable | Example Value | Description |
-   |:---|:---|:---|
-   | `PORT` | *(set automatically by Render)* | Port the Express server listens on. Read dynamically from `process.env.PORT`. |
-   | `JWT_SECRET` | `your_long_secure_random_jwt_secret_32_bytes` | Secret key (min 16 chars) used to sign and verify JWT authentication tokens. |
-   | `FRONTEND_URL` | `https://your-app.vercel.app` | **Strict CORS origin**. Set to your production Vercel frontend URL (do not include trailing slash). |
-   | `GEMINI_API_KEY` | `AIzaSy...` | Your Google Gemini API key. |
-   | `GEMINI_MODEL` | `gemini-1.5-flash` | Gemini model variant used for claim verification. |
-   | `AI_ENABLED` | `true` | Enables AI compliance scan via Gemini. If set to `false`, reviews run in deterministic rules-only mode. |
-   | `REDACTION_ENABLED`| `true` | Enforces character-preserving PII redaction before sending copy to external AI APIs. |
-   | `DEMO_MODE` | `true` | Enables 1-click persona switching (Creator, Reviewer, Manager, Admin) for testing and demonstrations. |
-
-> [!NOTE]
-> **Ephemeral Storage & Auto-Seeding**: Because Render free instances utilize temporary, ephemeral disk storage, any file changes to `data/db.json` reset when the service spins down or redeploys. To ensure uninterrupted operation:
-> * On startup, if `backend/data/db.json` is missing, the backend automatically initializes with the full seed dataset (users, guidelines, approved facts, terminology, and sample contents).
-> * An admin can restore the fresh seed dataset at any time via the admin endpoint:
->   `POST /api/admin/reset-demo` (Requires `admin` role token).
+   * `PORT`: *(automatically provided by Render)*
+   * `JWT_SECRET`: Secret key (min 16 chars)
+   * `FRONTEND_URL`: Production Vercel URL (e.g., `https://brandguard-sanskar-ec31.vercel.app`)
+   * `GEMINI_API_KEY`: Your Gemini API key
+   * `GEMINI_MODEL`: `gemini-1.5-flash`
+   * `AI_ENABLED`: `true`
+   * `REDACTION_ENABLED`: `true`
+   * `DEMO_MODE`: `true`
 
 ---
 
-## 2. Frontend Deployment (Vercel)
+## 3. Data Persistence & Ephemeral Storage
 
-Deploy the frontend on [Vercel](https://vercel.com):
-
-1. **Import Project**: Select the GitHub repository.
-2. **Project Settings**:
-   * **Framework Preset**: `Vite`
-   * **Root Directory**: `./` (Root directory of the repo)
-   * **Build Command**: `npm run build`
-   * **Output Directory**: `dist`
-3. **Environment Variables**:
-   Configure the following variable in Vercel project settings:
-
-   | Variable | Value | Description |
-   |:---|:---|:---|
-   | `VITE_API_URL` | `https://brandguard-api.onrender.com` | Base URL of your deployed Render backend (without trailing slash). |
-
-4. **SPA Client-Side Routing**:
-   The repository includes a root [`vercel.json`](file:///e:/BrandGovernance/vercel.json) that rewrites all incoming routes to `/index.html`:
-   ```json
-   {
-     "rewrites": [
-       {
-         "source": "/(.*)",
-         "destination": "/index.html"
-       }
-     ]
-   }
-   ```
-   This ensures that refreshing pages on deep URLs (such as `/review/cnt-01`, `/brand-library`, or `/review-queue`) routes cleanly without `404 Not Found` errors.
+* On serverless platforms (Vercel) and free tier hosts (Render), the filesystem is ephemeral:
+  * When Vercel boots a serverless function instance, `backend/src/repo/dbRepo.js` auto-seeds `/tmp/brandguard_db.json`.
+  * On Render, if `data/db.json` is missing, seed runs automatically on startup.
+* To reset the demo state at any time, an admin user can call:
+  `POST /api/admin/reset-demo`
 
 ---
 
-## 3. Security & Zero-Secret Audit
+## 4. Security & Zero-Secret Audit
 
-* **No Frontend Secrets**: The frontend communicates solely over HTTP with the backend using session-scoped Bearer JWTs and relative API proxies. No Gemini API keys, JWT secrets, database credentials, or private hashes exist in the frontend code (`src/`), build bundles (`dist/`), or public assets.
+* **No Frontend Secrets**: The frontend communicates solely over HTTP with session-scoped Bearer JWTs and relative API proxies. No Gemini API keys, JWT secrets, database credentials, or private hashes exist in the frontend code (`src/`), build bundles (`dist/`), or public assets.
 * **Length-Preserving PII Redaction**: Personal identifying information (emails and phone numbers) in submitted copy is automatically redacted with matching `'X'` masks before any payload is dispatched to Gemini.
-* **CORS Lockdown**: In production, the backend rejects any browser request whose `Origin` header does not match `FRONTEND_URL`.
+* **CORS Protection**: The backend allows requests from `FRONTEND_URL`, localhost development, and `*.vercel.app` domains.
 
 ---
 
-## 4. Local Development
+## 5. Local Development
 
 ### Backend
 ```bash
 cd backend
 npm install
-cp .env.example .env
 npm run seed     # Seeds backend/data/db.json
 npm run dev      # Runs server on http://localhost:3001
-npm test         # Runs full Vitest suite (49 tests)
+npm test         # Runs full Vitest suite (49 tests passing)
 ```
 
 ### Frontend
@@ -110,8 +104,7 @@ npm run build    # Generates production bundle in dist/
 ```
 
 ### Health Check
-Verify the API is running locally or in production:
 ```bash
 curl http://localhost:3001/api/health
-# Response: {"status":"ok","uptime":12,"timestamp":"...","service":"BrandGuard API"}
+# Response: {"status":"ok","uptime":...,"timestamp":"...","service":"BrandGuard API"}
 ```
