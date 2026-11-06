@@ -64,24 +64,24 @@ app.get(['/api/health', '/health'], (req, res) => {
   });
 });
 
-// Route registration
-app.use('/api/auth', authRouter);
-app.use('/api/brand', brandRouter);
+// Route registration (support both /api/* and root /* paths for serverless flexibility)
+app.use(['/api/auth', '/auth'], authRouter);
+app.use(['/api/brand', '/brand'], brandRouter);
 
 // Nested content sub-routes
-app.use('/api/content/:id/comments', commentsRouter);
-app.use('/api/content/:id/status', statusRouter);
-app.use('/api/content/:id/review', reviewRouter);
-app.get('/api/content/:id/findings', requireAuth, getContentFindings);
-app.use('/api/content/:contentId/findings', findingsRouter);
+app.use(['/api/content/:id/comments', '/content/:id/comments'], commentsRouter);
+app.use(['/api/content/:id/status', '/content/:id/status'], statusRouter);
+app.use(['/api/content/:id/review', '/content/:id/review'], reviewRouter);
+app.get(['/api/content/:id/findings', '/content/:id/findings'], requireAuth, getContentFindings);
+app.use(['/api/content/:contentId/findings', '/content/:contentId/findings'], findingsRouter);
 
-app.use('/api/content', contentRouter);
-app.use('/api/findings', findingsRouter);
-app.use('/api/upload', uploadRouter);
-app.use('/api/insights', insightsRouter);
-app.use('/api/settings', settingsRouter);
-app.use('/api/activity', activityRouter);
-app.use('/api/admin', adminRouter);
+app.use(['/api/content', '/content'], contentRouter);
+app.use(['/api/findings', '/findings'], findingsRouter);
+app.use(['/api/upload', '/upload'], uploadRouter);
+app.use(['/api/insights', '/insights'], insightsRouter);
+app.use(['/api/settings', '/settings'], settingsRouter);
+app.use(['/api/activity', '/activity'], activityRouter);
+app.use(['/api/admin', '/admin'], adminRouter);
 
 // 404 handler for unknown routes
 app.use((req, res) => {

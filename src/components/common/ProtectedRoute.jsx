@@ -5,8 +5,19 @@ import { useAuth } from '../../context/AuthContext';
 import RoleBadge from './RoleBadge';
 
 export default function ProtectedRoute({ children, allowedRoles }) {
-  const { currentUser, canAccess } = useAuth();
+  const { currentUser, loading, canAccess } = useAuth();
   const location = useLocation();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-neutral-50">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
+          <span className="text-xs font-medium text-neutral-500">Loading BrandGuard...</span>
+        </div>
+      </div>
+    );
+  }
 
   if (!currentUser) {
     return <Navigate to="/login" state={{ from: location }} replace />;

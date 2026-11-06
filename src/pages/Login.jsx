@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, ArrowRight, CheckCircle2, AlertCircle, Loader2, KeyRound } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -16,6 +16,13 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submittingCreds, setSubmittingCreds] = useState(false);
+
+  // Auto-redirect to dashboard if user is already signed in
+  useEffect(() => {
+    if (currentUser && !authLoading) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [currentUser, authLoading, navigate]);
 
   const handleSelectRole = async (role) => {
     try {
