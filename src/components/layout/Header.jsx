@@ -1,10 +1,13 @@
 import React from 'react';
 import { Menu, UserCheck } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useBrand } from '../../context/BrandContext';
 import RoleBadge from '../common/RoleBadge';
 
 export default function Header({ onOpenSidebar }) {
   const { currentUser, demoUsers = [], loginAs } = useAuth();
+  const { brand } = useBrand();
+  const brandName = brand?.info?.name || brand?.name || 'Active Workspace';
 
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 bg-white border-b border-neutral-200 sm:px-6">
@@ -20,7 +23,7 @@ export default function Header({ onOpenSidebar }) {
 
         <div className="flex items-center gap-2">
           <span className="hidden sm:inline-block px-2.5 py-0.5 text-xs font-medium text-emerald-800 bg-emerald-50 rounded border border-emerald-200">
-            Brand: Verdant Skin
+            Workspace: {brandName}
           </span>
           <span className="inline-flex items-center gap-1 text-xs text-neutral-500">
             <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>

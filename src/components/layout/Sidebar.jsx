@@ -14,6 +14,7 @@ import {
   Users,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useBrand } from '../../context/BrandContext';
 import RoleBadge from '../common/RoleBadge';
 
 export default function Sidebar({ isOpen, onClose }) {
@@ -95,7 +96,7 @@ export default function Sidebar({ isOpen, onClose }) {
             </div>
             <div>
               <span className="text-base font-semibold text-neutral-900 tracking-tight">BrandGuard</span>
-              <span className="block text-[11px] font-medium text-neutral-500">Verdant Skin</span>
+              <span className="block text-[11px] font-medium text-neutral-500">{brandName}</span>
             </div>
           </div>
           <button

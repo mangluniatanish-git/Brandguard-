@@ -48,8 +48,7 @@ export default function Login() {
           Sign In to BrandGuard
         </h1>
         <p className="mt-2 text-sm text-neutral-600">
-          Content compliance, regulatory verification, and human brand governance for{' '}
-          <strong className="text-neutral-900 font-semibold">Verdant Skin</strong>.
+          Enterprise content compliance, regulatory verification, and human brand governance.
         </p>
       </div>
 
