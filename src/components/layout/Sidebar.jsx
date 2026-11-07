@@ -19,6 +19,8 @@ import RoleBadge from '../common/RoleBadge';
 
 export default function Sidebar({ isOpen, onClose }) {
   const { currentUser, logout, canAccess } = useAuth();
+  const { brand } = useBrand();
+  const brandName = brand?.info?.name || brand?.name || 'Workspace';
 
   const allNavItems = [
     {
